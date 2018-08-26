@@ -7,10 +7,15 @@ library(grid)
 
 state_df<-read.csv("state_level_df.csv", stringsAsFactors = FALSE)
 us_shape<-fiftystater::fifty_states
+
+##### ----- Annotation images -----
 beer_mug<-readPNG("beer-vector-art.png") %>%
   rasterGrob(interpolate = TRUE)
 
 stout_mug<-jpeg::readJPEG("dark-pint-of-ale.jpg") %>%
+  rasterGrob(interpolate = TRUE)
+
+shandy_glass<-readPNG("shandy.png") %>%
   rasterGrob(interpolate = TRUE)
 
 ##### ----- Creating state summary table -----
@@ -35,8 +40,12 @@ state_summaries<-group_by(state_df, state) %>%
             proprietor_count = sum(brewery_type == "Proprietor"),
             proprietor_per_drinkers = proprietor_count/drink_pop10k,
             regional_count = sum(brewery_type == "Regional"),
-            regional_per_drinkers = regional_count/drink_pop10k
+            regional_per_drinkers = regional_count/drink_pop10k,
+            craft_count = brewpub_count + micro_count + regional_count,
+            craft_per_drinkers = craft_count/drink_pop10k
             )
+
+write.csv(state_summaries, "state_summaries.csv", row.names = FALSE)
 
 state_summaries %>%
   mutate_if(is.numeric, round, digits = 3) %>%
@@ -105,4 +114,32 @@ ggplot(data = us_shape) +
         plot.caption = element_text(size = 12)
   )  +
   annotation_custom(stout_mug, xmin = -80, xmax = -60, ymax = 35, ymin = 25)
+dev.off()
+
+
+png(filename = "state_craft.png",
+    width = 1200,
+    height = 1080)
+
+ggplot(data = us_shape) +
+  geom_polygon(aes(x = long, y = lat, group = group, fill = craft_per_drinkers),
+               color = "black") +
+  scale_fill_viridis(name = "",
+                     option = "magma",
+                     begin = .65,
+                     direction = -1) +
+  coord_equal() +
+  labs(title = "Craft Breweries",
+       subtitle = "per 10k Residents age 21+",
+       caption = "Combines brewpubs, microbreweries, and regional craft breweries.
+       \nSource: https://github.com/LizLeki/project_brew") +
+  theme_void() +
+  theme(legend.key.size = unit(1, "in"), 
+        legend.text = element_text(size = 20),
+        plot.title = element_text(size = 40, hjust = .5),
+        plot.subtitle = element_text(size = 25, hjust = .5),
+        plot.caption = element_text(size = 12)
+  ) #+
+  #annotation_custom(shandy_glass, xmin = -80, xmax = -60, ymax = 35, ymin = 25)
+
 dev.off()

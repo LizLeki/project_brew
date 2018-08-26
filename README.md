@@ -13,6 +13,7 @@ Brewery data scraped from the directory of the [Brewers Association](https://www
   4. Brewery and population data is combined in data_combos.R
   5. Exploratory tables and visualizations are created in data_explo.R
 
+<img src = "state_craft.png" width = "700" height = "700" />
 <img src = "state_brewpubs.png" width = "700" height = "700" />
 <img src = "state_planned.png" width = "700" height = "700" />
 
