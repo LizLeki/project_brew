@@ -14,5 +14,4 @@ Brewery data scraped from the directory of the [Brewers Association](https://www
   5. Exploratory tables and visualizations are created in data_explo.R
 
 
-
-![picture](state_brewpubs.png)
+<img src = "state_brewpubs.png" width = "800" height = "800" />
