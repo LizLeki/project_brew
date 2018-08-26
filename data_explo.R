@@ -10,6 +10,8 @@ us_shape<-fiftystater::fifty_states
 beer_mug<-readPNG("beer-vector-art.png") %>%
   rasterGrob(interpolate = TRUE)
 
+stout_mug<-jpeg::readJPEG("dark-pint-of-ale.jpg") %>%
+  rasterGrob(interpolate = TRUE)
 
 ##### ----- Creating state summary table -----
 state_summaries<-group_by(state_df, state) %>%
@@ -84,4 +86,23 @@ ggplot(data = us_shape) +
 
 dev.off()
 
-
+png(filename = "state_planned.png",
+    width = 1200,
+    height = 1080)
+ggplot(data = us_shape) +
+  geom_polygon(aes(x = long, y = lat, group = group, fill = planned_per_drinkers),
+               color = "black") +
+  scale_fill_continuous(name = "", low = "#ffe6cc",high = "#331a00") +
+  coord_equal() +
+  labs(title = "Breweries Planned",
+       subtitle = "per 10k Residents age 21+",
+       caption = "Source: https://github.com/LizLeki/project_brew") +
+  theme_void() +
+  theme(legend.key.size = unit(1, "in"), 
+        legend.text = element_text(size = 20),
+        plot.title = element_text(size = 40, hjust = .5),
+        plot.subtitle = element_text(size = 25, hjust = .5),
+        plot.caption = element_text(size = 12)
+  )  +
+  annotation_custom(stout_mug, xmin = -80, xmax = -60, ymax = 35, ymin = 25)
+dev.off()
