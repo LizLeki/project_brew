@@ -15,3 +15,4 @@ Brewery data scraped from the directory of the [Brewers Association](https://www
 
 
 <img src = "state_brewpubs.png" width = "800" height = "800" />
+
