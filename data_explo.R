@@ -72,13 +72,13 @@ png(filename = "out/state_brewpubs.png",
     height = 1080)
 
 ggplot(data = us_shape) +
+  geom_polygon(aes(x = long, y = lat-.25, group = group),
+               fill = "black") +
   geom_polygon(aes(x = long, y = lat, group = group, fill = brewpub_per_drinkers),
-               color = "black") +
+               size = 1, color = "black") +
   #scale_fill_continuous(name = "", low = "#ffffcc",high = "#ffb300") +
-  scale_fill_viridis(name = "",
-                     option = "inferno",
-                     begin = .65,
-                     direction = -1) +
+  scale_fill_viridis(name = "", option = "inferno",
+                     begin = .65, direction = -1) +
   coord_equal() +
   labs(title = "United States Brewpubs",
        subtitle = "per 10k Residents age 21+",
@@ -100,8 +100,10 @@ png(filename = "out/state_planned.png",
     height = 1080)
 
 ggplot(data = us_shape) +
+  geom_polygon(aes(x = long, y = lat-.25, group = group),
+               fill = "black") +
   geom_polygon(aes(x = long, y = lat, group = group, fill = planned_per_drinkers),
-               color = "black") +
+               size = 1, color = "black") +
   scale_fill_continuous(name = "", low = "#ffe6cc",high = "#331a00") +
   coord_equal() +
   labs(title = "Breweries Planned",
@@ -113,7 +115,8 @@ ggplot(data = us_shape) +
         legend.text = element_text(size = 20),
         plot.title = element_text(size = 40, hjust = .5),
         plot.subtitle = element_text(size = 25, hjust = .5),
-        plot.caption = element_text(size = 12)
+        plot.caption = element_text(size = 12),
+        plot.margin = unit(c(0,0,0,0), units = "in")
   )  +
   annotation_custom(stout_mug, xmin = -80, xmax = -60, ymax = 35, ymin = 25)
 dev.off()
@@ -124,12 +127,12 @@ png(filename = "out/state_craft.png",
     height = 1080)
 
 ggplot(data = us_shape) +
+  geom_polygon(aes(x = long, y = lat-.25, group = group),
+               fill = "black") +
   geom_polygon(aes(x = long, y = lat, group = group, fill = craft_per_drinkers),
-               color = "black") +
-  scale_fill_viridis(name = "",
-                     option = "magma",
-                     begin = .65,
-                     direction = -1) +
+               size = 1, color = "black") +
+  scale_fill_viridis(name = "", option = "magma",
+                     begin = .65, direction = -1) +
   coord_equal() +
   labs(title = "Craft Breweries",
        subtitle = "per 10k Residents age 21+",
