@@ -52,6 +52,10 @@ table_list<-lapply(c("li.name", "li.brewery_type", "li.address", "li.telephone",
     )
 })
 
+full_data_index<-sapply(table_list, function(.df){
+  nrow(.df) == nrow(full_table)
+})
+
 ##### ----- Fill in missing data -----
 
 #address line2 (city,state zip)
@@ -65,10 +69,10 @@ line2_ind<-long_df$all_info %in% table_list[[3]]$address %>%
 address2<-data.frame(long_df[line2_ind,]) %>%
   transmute(address2 = all_info)
 
-#phone numbers not always present
+#which rows contain phone numbers?
 phone_ind<-str_detect(string = full_table$full_string, pattern = "Phone")
 
-#websites not always present
+#which rows contain websites?
 url_ind<-str_detect(string = full_table$full_string,
                     pattern = regex("www\\.|\\.co|\\.net|\\.beer|\\.bar|\\.pub|\\.edu",
                                     ignore_case = TRUE)
