@@ -82,7 +82,8 @@ ggplot(data = us_shape) +
   coord_equal() +
   labs(title = "United States Brewpubs",
        subtitle = "per 10k Residents age 21+",
-       caption = "Source: https://github.com/LizLeki/project_brew") +
+       caption = "Code source: https://github.com/LizLeki/project_brew
+       \nData source: https://www.brewersassociation.org/directories/breweries/") +
   theme_void() +
   theme(legend.key.size = unit(1, "in"), 
         legend.text = element_text(size = 20),
@@ -97,6 +98,7 @@ dev.off()
 png(filename = "out/state_planned.png",
     width = 1200,
     height = 1080)
+
 ggplot(data = us_shape) +
   geom_polygon(aes(x = long, y = lat, group = group, fill = planned_per_drinkers),
                color = "black") +
@@ -104,7 +106,8 @@ ggplot(data = us_shape) +
   coord_equal() +
   labs(title = "Breweries Planned",
        subtitle = "per 10k Residents age 21+",
-       caption = "Source: https://github.com/LizLeki/project_brew") +
+       caption = "Code source: https://github.com/LizLeki/project_brew
+       \nData source: https://www.brewersassociation.org/directories/breweries/") +
   theme_void() +
   theme(legend.key.size = unit(1, "in"), 
         legend.text = element_text(size = 20),
@@ -131,7 +134,8 @@ ggplot(data = us_shape) +
   labs(title = "Craft Breweries",
        subtitle = "per 10k Residents age 21+",
        caption = "Combines brewpubs, microbreweries, and regional craft breweries.
-       \nSource: https://github.com/LizLeki/project_brew") +
+       \nSource: https://github.com/LizLeki/project_brew
+       \nData source: https://www.brewersassociation.org/directories/breweries/") +
   theme_void() +
   theme(legend.key.size = unit(1, "in"), 
         legend.text = element_text(size = 20),
