@@ -2,20 +2,19 @@ library(dplyr)
 library(DT)
 library(ggplot2)
 library(viridis)
-library(png)
 library(grid)
 
 state_df<-read.csv("state_level_df.csv", stringsAsFactors = FALSE)
 us_shape<-fiftystater::fifty_states
 
 ##### ----- Annotation images -----
-beer_mug<-readPNG("beer-vector-art.png") %>%
+beer_mug<-png::readPNG("img/beer-vector-art.png") %>%
   rasterGrob(interpolate = TRUE)
 
-stout_mug<-jpeg::readJPEG("dark-pint-of-ale.jpg") %>%
+stout_mug<-jpeg::readJPEG("img/dark-pint-of-ale.jpg") %>%
   rasterGrob(interpolate = TRUE)
 
-shandy_glass<-readPNG("shandy.png") %>%
+shandy_glass<-png::readPNG("img/shandy.png") %>%
   rasterGrob(interpolate = TRUE)
 
 ##### ----- Creating state summary table -----
@@ -68,7 +67,7 @@ glimpse(us_shape)
 
 ##### ----- Summary plots -----
 
-png(filename = "state_brewpubs.png",
+png(filename = "out/state_brewpubs.png",
     width = 1200,
     height = 1080)
 
@@ -95,7 +94,7 @@ ggplot(data = us_shape) +
 
 dev.off()
 
-png(filename = "state_planned.png",
+png(filename = "out/state_planned.png",
     width = 1200,
     height = 1080)
 ggplot(data = us_shape) +
@@ -117,7 +116,7 @@ ggplot(data = us_shape) +
 dev.off()
 
 
-png(filename = "state_craft.png",
+png(filename = "out/state_craft.png",
     width = 1200,
     height = 1080)
 
