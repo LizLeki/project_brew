@@ -104,6 +104,3 @@ sapply(table_list, nrow)
 write.csv(fin_df, "all_brews.csv", row.names = FALSE)
 
 write.csv(fin_df, paste0("table_iterations/", Sys.Date(), ".csv"), row.names = FALSE)
-
-
-

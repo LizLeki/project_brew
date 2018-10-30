@@ -1,7 +1,7 @@
 # project_brew
 An exploration of craft breweries across the United States.
 
-The most recent data pull was completed on September 12th, 2018. This data can be found in all_brews.csv.
+The most recent data pull was completed on October 30th, 2018. Brewery-level data can be found in all_brews.csv. State-level summary data can be found in state_level_df.csv.
 
 Brewery data scraped from the directory of the [Brewers Association](https://www.brewersassociation.org/directories/breweries/), using a combination of Docker and RSelenium.
 
